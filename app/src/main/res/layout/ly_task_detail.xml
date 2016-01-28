@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img_task_popup_window_bg"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/iv_task_detail_colog_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <net.rippletec.layout.WaveView
+            android:id="@+id/wv_task_detail_wave_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:id="@+id/ly_task_detail_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/tv_task_detail_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_margin="12dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="Hello rolealiu!"
+                android:textColor="@color/clr_white"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/tv_task_detail_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginStart="12dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="32%"
+                android:textColor="@color/clr_white"
+                android:textSize="82sp" />
+        </RelativeLayout>
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/ly_task_detail_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:clickable="true" >
+
+        <TextView
+            android:id="@+id/tv_task_detail_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="12dp"
+            android:shadowColor="@color/clr_text_shadow"
+            android:shadowDx="0"
+            android:shadowDy="3"
+            android:shadowRadius="5"
+            android:text="@string/txt_task_finish"
+            android:textColor="@color/clr_text_confirm_n"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:id="@+id/iv_task_detail_confirm"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="12dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_task_confirm_n" />
+    </RelativeLayout>
+
+</LinearLayout>

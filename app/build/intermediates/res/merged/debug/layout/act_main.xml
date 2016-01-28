@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gra_main_bg"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/ly_main_header_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/clr_main_header_bg">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/img_main_header_gradient_bg" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <!--
+                    <ImageButton
+                    android:id="@+id/ibtn_main_header_menu"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@color/clr_none"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_menu" />
+                -->
+
+                <TextView
+                    android:id="@+id/tv_main_header_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_header_title"
+                    android:textColor="@color/clr_white"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/tv_main_header_remainingTime_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_main_header_title"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/txt_newday_time_title"
+                    android:textColor="@color/clr_white"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_main_header_remainingTime_title"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginStart="2dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_remain_hour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/clr_white"
+                        android:textSize="32sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginRight="4dp"
+                        android:text="@string/txt_time_hour_signal"
+                        android:textColor="@color/clr_white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_remain_minutes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/clr_white"
+                        android:textSize="32sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginRight="4dp"
+                        android:text="@string/txt_time_minute_signal"
+                        android:textColor="@color/clr_white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_remain_second"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/clr_white"
+                        android:textSize="32sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="1dp"
+                        android:text="@string/txt_time_second_signal"
+                        android:textColor="@color/clr_white"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </RelativeLayout>
+        </FrameLayout>
+
+        <net.rippletec.layout.ListRecyclerView
+            android:id="@+id/rv_main_task"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:scrollbars="none"></net.rippletec.layout.ListRecyclerView>
+    </LinearLayout>
+
+    <net.rippletec.layout.FloatingActionButton
+        android:id="@+id/iv_main_floating_action_button"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/selector_task_add" />
+
+    <!-- dialog弹出框遮罩层 -->
+
+    <ImageView
+        android:id="@+id/iv_main_popupWindow_mask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/clr_black"
+        android:scaleType="fitXY"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/iv_main_popupWindow_mask_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/clr_white"
+        android:visibility="gone" />
+
+</FrameLayout><!-- From: file:/P:/android/RippleSchedule/app/src/main/res/layout/act_main.xml -->

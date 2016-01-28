@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<net.rippletec.layout.DispatchTouchFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/img_task_popup_window_bg"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ly_add_task_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/clr_light"
+                    android:hint="@string/txt_task_title_hint"
+                    android:maxLines="2"
+                    android:paddingBottom="18dp"
+                    android:paddingEnd="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingStart="8dp"
+                    android:paddingTop="18dp"
+                    android:textColor="@color/clr_et_bg_n"
+                    android:textColorHint="@color/clr_text_h3"
+                    android:textCursorDrawable="@null"
+                    android:textSize="22sp" />
+
+                <RelativeLayout
+                    android:id="@+id/ly_add_task_startDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/txt_task_start_date"
+                            android:textColor="@color/clr_text_h1"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tv_add_task_startDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/clr_text_h2"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_task_detail" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/ly_add_task_startTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/txt_task_start_time"
+                            android:textColor="@color/clr_text_h1"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tv_add_task_startTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/clr_text_h2"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_task_detail" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/ly_add_task_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/txt_task_duration_time"
+                            android:textColor="@color/clr_text_h1"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tv_add_task_duration"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/clr_text_h2"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_task_detail" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txt_task_color_singal"
+                        android:textColor="@color/clr_text_h1"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+
+                        <ImageView
+                            android:id="@+id/iv_add_task_color_signal_none"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginRight="12dp"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/img_signal_none_n" />
+
+                        <ImageView
+                            android:id="@+id/iv_add_task_color_signal_purple"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginRight="12dp"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/img_signal_purple_n" />
+
+                        <ImageView
+                            android:id="@+id/iv_add_task_color_signal_blue"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginRight="12dp"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/img_signal_blue_n" />
+
+                        <ImageView
+                            android:id="@+id/iv_add_task_color_signal_green"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginRight="12dp"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/img_signal_green_n" />
+
+                        <ImageView
+                            android:id="@+id/iv_add_task_color_signal_yellow"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginRight="12dp"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/img_signal_yellow_n" />
+
+                        <ImageView
+                            android:id="@+id/iv_add_task_color_signal_red"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/img_signal_red_n" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ly_add_task_startDate_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shp_border_bottom"
+                    android:paddingBottom="18dp"
+                    android:paddingEnd="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingStart="8dp"
+                    android:paddingTop="18dp"
+                    android:text="@string/txt_task_start_date"
+                    android:textColor="@color/clr_text_h2"
+                    android:textSize="22sp" />
+
+                <CalendarView
+                    android:id="@+id/calendarView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ly_add_task_startTime_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shp_border_bottom"
+                    android:paddingBottom="18dp"
+                    android:paddingEnd="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingStart="8dp"
+                    android:paddingTop="18dp"
+                    android:text="@string/txt_task_start_time"
+                    android:textColor="@color/clr_text_h2"
+                    android:textSize="22sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <net.rippletec.layout.NumberWheelView
+                        android:id="@+id/wv_add_task_startTime_hour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"></net.rippletec.layout.NumberWheelView>
+
+                    <net.rippletec.layout.NumberWheelView
+                        android:id="@+id/wv_add_task_startTime_minutes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"></net.rippletec.layout.NumberWheelView>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ly_add_task_duration_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shp_border_bottom"
+                    android:paddingBottom="18dp"
+                    android:paddingEnd="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingStart="8dp"
+                    android:paddingTop="18dp"
+                    android:text="@string/txt_task_duration_time"
+                    android:textColor="@color/clr_text_h2"
+                    android:textSize="22sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <net.rippletec.layout.NumberWheelView
+                        android:id="@+id/wv_add_task_duration_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"></net.rippletec.layout.NumberWheelView>
+
+                    <net.rippletec.layout.NumberWheelView
+                        android:id="@+id/wv_add_task_duration_hour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"></net.rippletec.layout.NumberWheelView>
+
+                    <net.rippletec.layout.NumberWheelView
+                        android:id="@+id/wv_add_task_duration_minutes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"></net.rippletec.layout.NumberWheelView>
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+        <RelativeLayout
+            android:id="@+id/ly_add_task_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:background="@drawable/shp_border_top"
+            android:clickable="true">
+
+            <TextView
+                android:id="@+id/tv_add_task_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="12dp"
+                android:shadowColor="@color/clr_text_shadow"
+                android:shadowDx="0"
+                android:shadowDy="3"
+                android:shadowRadius="5"
+                android:text="@string/txt_task_confirm"
+                android:textColor="@color/clr_text_confirm_n"
+                android:textSize="22sp" />
+
+            <ImageView
+                android:id="@+id/iv_add_task_confirm"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="12dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/img_task_confirm_n" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</net.rippletec.layout.DispatchTouchFrameLayout><!-- From: file:/P:/android/RippleSchedule/app/src/main/res/layout/ly_add_task.xml -->

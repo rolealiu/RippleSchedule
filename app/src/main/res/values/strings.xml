@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">rippleSchedule</string>
+    <string name="txt_header_title">RIPPLE SCHEDULE</string>
+    <string name="txt_year">年</string>
+    <string name="txt_month">月</string>
+    <string name="txt_day">天</string>
+    <string name="txt_date">日</string>
+    <string name="txt_hour">时</string>
+    <string name="txt_minute">分</string>
+    <string name="txt_second">秒</string>
+    <string name="txt_add_task">添加计划</string>
+    <string name="txt_confirm_task">确认添加</string>
+    <string name="txt_remaining_time_title">距离今日结束：</string>
+    <string name="txt_newday_time_title">新的一天已开始：</string>
+    <string name="txt_time_hour_signal">小时</string>
+    <string name="txt_time_minute_signal">分钟</string>
+    <string name="txt_time_second_signal">秒</string>
+    <string name="txt_task_name">任务名称</string>
+    <string name="txt_task_finish">任务完成</string>
+    <string name="txt_task_title_hint">你要完成什么?</string>
+    <string name="txt_task_confirm">确认添加</string>
+    <string name="txt_task_start_date">开始日期</string>
+    <string name="txt_task_start_time">开始时间</string>
+    <string name="txt_task_duration_time">任务期限</string>
+    <string name="txt_task_color_singal">颜色标记</string>
+
+</resources>

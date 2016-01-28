@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="clr_none">#00000000</color>
+    <color name="clr_white">#ffffffff</color>
+    <color name="clr_light">#fffafafa</color>
+    <color name="clr_gray">#fff1f1f1</color>
+    <color name="clr_black">#ff000000</color>
+    <color name="clr_mask_shadow">#33000000</color>
+    <color name="clr_main_header_bg">#ff93bc5e</color>
+    <color name="clr_task_title">#ff333333</color>
+    <color name="clr_task_remainTime">#ff9e9e9e</color>
+    <color name="clr_23_5">#ff342c4c</color>
+    <color name="clr_6_8">#ff44a2d3</color>
+    <color name="clr_9_11">#ff93bc5e</color>
+    <color name="clr_12_15">#fff4c932</color>
+    <color name="clr_16_17">#fff0703e</color>
+    <color name="clr_18_19">#ff81b3f0</color>
+    <color name="clr_20_22">#ff5962d5</color>
+    <color name="clr_text_h1">#ff333333</color>
+    <color name="clr_text_h2">#ff999999</color>
+    <color name="clr_text_h3">#ffdddddd</color>
+    <color name="clr_text_shadow">#fff2f2f2</color>
+    <color name="clr_text_confirm_n">#ff93bc5e</color>
+    <color name="clr_text_confirm_a">#ff678d36</color>
+    <color name="clr_ly_confirm_a">#fff8f8f8</color>
+    <color name="clr_per_90_100">#ffb4dd7e</color>
+    <color name="clr_per_80_90">#ffc6e279</color>
+    <color name="clr_per_70_80">#ffd7e279</color>
+    <color name="clr_per_60_70">#ffe2db79</color>
+    <color name="clr_per_50_60">#ffe2c979</color>
+    <color name="clr_per_40_50">#ffe2b779</color>
+    <color name="clr_per_30_40">#ffef8a3e</color>
+    <color name="clr_per_20_30">#ffef753e</color>
+    <color name="clr_per_10_20">#ffef583e</color>
+    <color name="clr_per_0_10">#ffe34a4d</color>
+    <color name="clr_et_bg_n">#ff9acb5a</color>
+    <color name="clr_et_hint">#ffbcdc94</color>
+
+</resources>

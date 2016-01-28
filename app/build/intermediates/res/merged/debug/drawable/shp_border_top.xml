@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item>
+        <shape>
+            <solid android:color="#fff2f2f2" />
+        </shape>
+    </item>
+    <item android:top="1dp">
+        <shape>
+            <solid android:color="#ffffffff" />
+        </shape>
+    </item>
+
+</layer-list><!-- From: file:/P:/android/RippleSchedule/app/src/main/res/drawable/shp_border_top.xml -->
