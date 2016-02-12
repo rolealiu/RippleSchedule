@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/P:/android/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
+    <!-- From: file:/G:/AndroidStudioProjects/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="dimension" name="height"/>
@@ -31,7 +31,7 @@
     <color name="bright_foreground_material_light">@android:color/black</color>
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
-    <!-- From: file:/P:/android/RippleSchedule/app/src/main/res/values/color.xml -->
+    <!-- From: file:/G:/AndroidStudioProjects/RippleSchedule/app/src/main/res/values/color.xml -->
     <eat-comment/>
     <color name="clr_12_15">#fff4c932</color>
     <color name="clr_16_17">#fff0703e</color>
@@ -68,7 +68,7 @@
     <color name="clr_text_h3">#ffdddddd</color>
     <color name="clr_text_shadow">#fff2f2f2</color>
     <color name="clr_white">#ffffffff</color>
-    <!-- From: file:/P:/android/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
+    <!-- From: file:/G:/AndroidStudioProjects/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
     <eat-comment/>
     <color name="dim_foreground_disabled_material_dark">#80bebebe</color>
     <color name="dim_foreground_disabled_material_light">#80323232</color>
@@ -207,10 +207,10 @@
     <item format="float" name="highlight_alpha_material_colored" type="dimen">0.26</item>
     <item format="float" name="highlight_alpha_material_dark" type="dimen">0.20</item>
     <item format="float" name="highlight_alpha_material_light" type="dimen">0.12</item>
-    <!-- From: file:/P:/android/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.0.1/res/values/values.xml -->
+    <!-- From: file:/G:/AndroidStudioProjects/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.0.1/res/values/values.xml -->
     <eat-comment/>
     <dimen name="item_touch_helper_max_drag_scroll_per_frame">20dp</dimen>
-    <!-- From: file:/P:/android/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
+    <!-- From: file:/G:/AndroidStudioProjects/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
     <eat-comment/>
     <dimen name="notification_large_icon_height">64dp</dimen>
     <dimen name="notification_large_icon_width">64dp</dimen>
@@ -221,10 +221,10 @@
     <item name="action_menu_divider" type="id"/>
     <item name="action_menu_presenter" type="id"/>
     <item name="home" type="id"/>
-    <!-- From: file:/P:/android/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.0.1/res/values/values.xml -->
+    <!-- From: file:/G:/AndroidStudioProjects/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.0.1/res/values/values.xml -->
     <eat-comment/>
     <item name="item_touch_helper_previous_elevation" type="id"/>
-    <!-- From: file:/P:/android/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
+    <!-- From: file:/G:/AndroidStudioProjects/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
     <eat-comment/>
     <item name="progress_circular" type="id"/>
     <item name="progress_horizontal" type="id"/>
@@ -252,13 +252,13 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
-    <!-- From: file:/P:/android/RippleSchedule/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/G:/AndroidStudioProjects/RippleSchedule/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="app_name">rippleSchedule</string>
-    <!-- From: file:/P:/android/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
+    <!-- From: file:/G:/AndroidStudioProjects/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
     <eat-comment/>
     <string name="status_bar_notification_info_overflow">999+</string>
-    <!-- From: file:/P:/android/RippleSchedule/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/G:/AndroidStudioProjects/RippleSchedule/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="txt_add_task">添加计划</string>
     <string name="txt_confirm_task">确认添加</string>
@@ -269,6 +269,7 @@
     <string name="txt_minute">分</string>
     <string name="txt_month">月</string>
     <string name="txt_newday_time_title">新的一天已开始：</string>
+    <string name="txt_remain_time">剩下</string>
     <string name="txt_remaining_time_title">距离今日结束：</string>
     <string name="txt_second">秒</string>
     <string name="txt_task_color_singal">颜色标记</string>
@@ -283,13 +284,13 @@
     <string name="txt_time_minute_signal">分钟</string>
     <string name="txt_time_second_signal">秒</string>
     <string name="txt_year">年</string>
-    <!-- From: file:/P:/android/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
+    <!-- From: file:/G:/AndroidStudioProjects/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
     <eat-comment/>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
     <style name="Animation.AppCompat.Dialog" parent="Base.Animation.AppCompat.Dialog"/>
     <style name="Animation.AppCompat.DropDownUp" parent="Base.Animation.AppCompat.DropDownUp"/>
-    <!-- From: file:/P:/android/RippleSchedule/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/G:/AndroidStudioProjects/RippleSchedule/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
         <!--
@@ -304,7 +305,7 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-    <!-- From: file:/P:/android/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
+    <!-- From: file:/G:/AndroidStudioProjects/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
     <eat-comment/>
     <style name="Base.AlertDialog.AppCompat" parent="android:Widget">
         <item name="android:layout">@layout/abc_alert_dialog_material</item>
@@ -1544,7 +1545,7 @@
     <style name="Widget.AppCompat.TextView.SpinnerItem" parent="Base.Widget.AppCompat.TextView.SpinnerItem"/>
     <style name="Widget.AppCompat.Toolbar" parent="Base.Widget.AppCompat.Toolbar"/>
     <style name="Widget.AppCompat.Toolbar.Button.Navigation" parent="Base.Widget.AppCompat.Toolbar.Button.Navigation"/>
-    <!-- From: file:/P:/android/RippleSchedule/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/G:/AndroidStudioProjects/RippleSchedule/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="task_detail_popwindow" parent="@android:style/Animation">
         <item name="android:windowEnterAnimation">@anim/enter</item>

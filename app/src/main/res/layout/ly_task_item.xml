@@ -47,7 +47,7 @@
                 android:ellipsize="end"
                 android:maxWidth="190dp"
                 android:singleLine="true"
-                android:text="完成RippleSchedule"
+                android:text="RippleSchedule"
                 android:textColor="@color/clr_task_title"
                 android:textSize="18sp" />
 

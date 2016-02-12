@@ -47,7 +47,7 @@
                 android:ellipsize="end"
                 android:maxWidth="190dp"
                 android:singleLine="true"
-                android:text="完成RippleSchedule"
+                android:text="RippleSchedule"
                 android:textColor="@color/clr_task_title"
                 android:textSize="18sp" />
 
@@ -71,4 +71,4 @@
             android:src="@drawable/img_task_detail" />
     </RelativeLayout>
 
-</FrameLayout><!-- From: file:/P:/android/RippleSchedule/app/src/main/res/layout/ly_task_item.xml -->
+</FrameLayout><!-- From: file:/G:/AndroidStudioProjects/RippleSchedule/app/src/main/res/layout/ly_task_item.xml -->

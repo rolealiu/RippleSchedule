@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <net.rippletec.layout.DispatchTouchFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,6 +24,7 @@
                 android:visibility="visible">
 
                 <EditText
+                    android:id="@+id/et_add_task_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/clr_light"
@@ -175,7 +178,7 @@
                             android:layout_marginEnd="12dp"
                             android:layout_marginRight="12dp"
                             android:scaleType="centerInside"
-                            android:src="@drawable/img_signal_none_n" />
+                            android:src="@drawable/img_signal_none_a" />
 
                         <ImageView
                             android:id="@+id/iv_add_task_color_signal_purple"
@@ -245,7 +248,7 @@
                     android:textSize="22sp" />
 
                 <CalendarView
-                    android:id="@+id/calendarView1"
+                    android:id="@+id/calendarview_start_date"
                     android:layout_width="match_parent"
                     android:layout_height="300dp" />
             </LinearLayout>

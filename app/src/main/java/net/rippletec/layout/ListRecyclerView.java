@@ -1,4 +1,4 @@
-﻿package net.rippletec.layout;
+package net.rippletec.layout;
 
 import android.content.Context;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -63,6 +63,11 @@ public class ListRecyclerView extends RecyclerView {
         return super.onTouchEvent(ev);
     }
 
+    @Override
+    public void scrollTo(int x, int y) {
+        super.scrollTo(x, y);
+    }
+
     private class GestureOnItemTouchListener implements RecyclerView.OnItemTouchListener {
 
         private GestureDetector mGestureDetector;
@@ -81,7 +86,7 @@ public class ListRecyclerView extends RecyclerView {
             View childView = rv.findChildViewUnder(e.getX(), e.getY());
             if (childView != null && mOnItemClickListener != null && mGestureDetector.onTouchEvent(e)) {
                 // 触发单击事件
-                mOnItemClickListener.onItemClick(ListRecyclerView.this,childView, rv.getChildPosition(childView));
+                mOnItemClickListener.onItemClick(ListRecyclerView.this, childView, rv.getChildPosition(childView));
                 return true;
             }
             return false;
@@ -101,6 +106,6 @@ public class ListRecyclerView extends RecyclerView {
     }
 
     public interface OnItemClickListener {
-        void onItemClick(RecyclerView parent,View item, int position);
+        void onItemClick(RecyclerView parent, View item, int position);
     }
 }

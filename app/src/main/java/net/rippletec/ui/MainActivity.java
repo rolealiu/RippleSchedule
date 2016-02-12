@@ -1,6 +1,7 @@
-﻿package net.rippletec.ui;
+package net.rippletec.ui;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,6 +17,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.format.Time;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +25,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.rippletec.adapter.TaskListAdapter;
 import net.rippletec.dao.TaskData;
@@ -40,7 +43,7 @@ import net.rippletec.ui.base.ActivityBase;
  *
  * @author rolealiu 刘昊臻
  * @editor 钟毅凯
- * @updateDate 2016/01/28
+ * @updateDate 2016/02/12
  */
 public class MainActivity extends ActivityBase implements OnClickListener, ListRecyclerView.OnItemClickListener {
     private ObjectAnimator fabHideAnim;
@@ -52,6 +55,7 @@ public class MainActivity extends ActivityBase implements OnClickListener, ListR
     private TextView tvRemainMinutes;
     private TextView tvRemainSecond;
     private ListRecyclerView rvTask;
+    private TaskListAdapter adtTask;
     private FrameLayout lyHeaderBg;
     private ImageView ivTaskDetailMask;
     private ImageView ivTaskDetailMaskShadow;
@@ -128,12 +132,21 @@ public class MainActivity extends ActivityBase implements OnClickListener, ListR
         // 初始化任务列表
         rvTask = (ListRecyclerView) findViewById(R.id.rv_main_task);
         ArrayList<TaskData> itemList = new ArrayList<TaskData>();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 4; i++) {
             TaskData task = new TaskData();
-            task.setTaskDesc("item " + i);
+            task.setTaskDesc("task " + i);
+            task.setSignalColor(0xff000000);
+            task.setStartYear(2016);
+            task.setStartMonth(2);
+            task.setStartDay(12+ i);
+            task.setStartHour(14+i);
+            task.setStartMinute(20+i*5);
+            task.setLimitHour(i%3);
+            task.setLimitHour(i*2);
+            task.setLimitMinute(i*12);
             itemList.add(task);
         }
-        TaskListAdapter adtTask = new TaskListAdapter(this, itemList);
+        adtTask = new TaskListAdapter(this, itemList, rvTask);
         rvTask.setAdapter(adtTask);
     }
 
@@ -214,7 +227,7 @@ public class MainActivity extends ActivityBase implements OnClickListener, ListR
     /**
      * 更改顶部背景颜色
      *
-     * @param hourw
+     * @param hour
      */
     private void changeHeaderBackgroundColor(int hour) {
         // 通过时间判断颜色
@@ -287,6 +300,10 @@ public class MainActivity extends ActivityBase implements OnClickListener, ListR
             tvRemainMinutes.setText(59 - minute <= 9 ? "0" + (59 - minute) : "" + (59 - minute));
             tvRemainSecond.setText(59 - second <= 9 ? "0" + (59 - second) : "" + (59 - second));
         }
+
+        //每5秒更新任务列表的样式
+        if (second % 5 == 0)
+            adtTask.notifyDataSetChanged();
     }
 
     /**
@@ -316,7 +333,7 @@ public class MainActivity extends ActivityBase implements OnClickListener, ListR
         int screenWidth = (int) (ScreenModule.getScreenWidthPX(this) * 0.9);
         int screenHeight = (int) (ScreenModule.getScreenHeightPX(this) * 0.7);
         if (taskDetailPopupWindow == null) {
-            taskDetailPopupWindow = new TaskDetailPopupWindow(this, R.layout.ly_task_detail, screenWidth, screenHeight);
+            taskDetailPopupWindow = new TaskDetailPopupWindow(this, R.layout.ly_task_detail, screenWidth, screenHeight,adtTask.getItem(position));
         }
 
         // 设置背景遮罩动画
@@ -369,6 +386,10 @@ public class MainActivity extends ActivityBase implements OnClickListener, ListR
                     }
                 });
                 alphaAnimatorSet.start();
+
+                //查看popupwindow关闭前是否点击完成按钮
+                if (taskDetailPopupWindow.isTaskFinished())
+                    adtTask.removeItem(taskDetailPopupWindow.getTask());
             }
         });
     }
@@ -444,7 +465,11 @@ public class MainActivity extends ActivityBase implements OnClickListener, ListR
                     }
                 });
                 alphaAnimatorSet.start();
+                //popupwindow关闭时查看是否有返回结果
+                if (addTaskPopupWindow.getResult() != null)
+                    adtTask.addItem(addTaskPopupWindow.getResult(),0);
             }
         });
     }
+
 }

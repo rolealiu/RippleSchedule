@@ -1,8 +1,12 @@
 package net.rippletec.layout;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import net.rippletec.dao.TaskData;
 import net.rippletec.rippleSchedule.R;
 
 import android.animation.ArgbEvaluator;
@@ -23,31 +27,35 @@ import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * 任务详情弹出窗口
  *
  * @author rolealiu 刘昊臻
- * @updateDate 2015/10/16
+ * @editor 钟毅凯
+ * @updateDate 2016/02/12
  */
 public class TaskDetailPopupWindow implements OnClickListener {
+    private TaskData task;
+    private Context context;
     private PopupWindow window;
     private View contentView;
     private int windowWidth = 0;
     private int windowHeight = 0;
-    private ImageView iv_color_bg;
-    private ImageView iv_confirm;
-    private TextView tv_confirm;
-    private TextView tv_title;
-    private TextView tv_percent;
-    private RelativeLayout ly_task_info;
-    private RelativeLayout ly_task_confirm;
-    private WaveView wave_bg;
+    private ImageView ivColorBg;
+    private ImageView ivConfirm;
+    private TextView tvConfirm;
+    private TextView tvTitle;
+    private TextView tvPercent;
+    private RelativeLayout lyTaskInfo;
+    private RelativeLayout lyTaskConfirm;
+    private WaveView waveBg;
     private int colorNow = 0;
     private int colorTo = 1;
     private int colorFrom;
     private boolean isSetup = true;
-    private float test = 100;
+    private boolean isFinished = false;
     private Timer timer = new Timer();
     private TimerTask updateTimeTask = new TimerTask() {
 
@@ -59,13 +67,14 @@ public class TaskDetailPopupWindow implements OnClickListener {
     private Handler updateTimeHandle = new Handler() {
         public void handleMessage(android.os.Message msg) {
             if (msg.what == 1002) {
-                test -= 0.1f;
-                updateInfo(test);
+                updateInfo(getPercentage(task));
             }
         }
     };
 
-    public TaskDetailPopupWindow(Context context, int resource, int width, int height) {
+    public TaskDetailPopupWindow(Context context, int resource, int width, int height, TaskData task) {
+        this.task = task;
+        this.context = context;
         contentView = LayoutInflater.from(context).inflate(resource, null);
         windowWidth = width;
         windowHeight = height;
@@ -80,19 +89,19 @@ public class TaskDetailPopupWindow implements OnClickListener {
     }
 
     private void initListener() {
-        ly_task_confirm.setOnClickListener(this);
-        ly_task_confirm.setOnTouchListener(new OnTouchListener() {
+        lyTaskConfirm.setOnClickListener(this);
+        lyTaskConfirm.setOnTouchListener(new OnTouchListener() {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    tv_confirm.setTextColor(contentView.getResources().getColor(R.color.clr_text_confirm_a));
-                    iv_confirm.setImageResource(R.drawable.img_task_confirm_a);
-                    ly_task_confirm.setBackgroundColor(contentView.getResources().getColor(R.color.clr_ly_confirm_a));
+                    tvConfirm.setTextColor(contentView.getResources().getColor(R.color.clr_text_confirm_a));
+                    ivConfirm.setImageResource(R.drawable.img_task_confirm_a);
+                    lyTaskConfirm.setBackgroundColor(contentView.getResources().getColor(R.color.clr_ly_confirm_a));
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    tv_confirm.setTextColor(contentView.getResources().getColor(R.color.clr_text_confirm_n));
-                    iv_confirm.setImageResource(R.drawable.img_task_confirm_n);
-                    ly_task_confirm.setBackgroundColor(contentView.getResources().getColor(R.color.clr_none));
+                    tvConfirm.setTextColor(contentView.getResources().getColor(R.color.clr_text_confirm_n));
+                    ivConfirm.setImageResource(R.drawable.img_task_confirm_n);
+                    lyTaskConfirm.setBackgroundColor(contentView.getResources().getColor(R.color.clr_none));
                 }
                 return false;
             }
@@ -102,46 +111,47 @@ public class TaskDetailPopupWindow implements OnClickListener {
     private void initView() {
         int tmpHeight = (int) (windowWidth * 0.8);
 
-        wave_bg = (WaveView) contentView.findViewById(R.id.wv_task_detail_wave_bg);
-        android.view.ViewGroup.LayoutParams waveLP = wave_bg.getLayoutParams();
+        waveBg = (WaveView) contentView.findViewById(R.id.wv_task_detail_wave_bg);
+        android.view.ViewGroup.LayoutParams waveLP = waveBg.getLayoutParams();
         waveLP.width = windowWidth;
         waveLP.height = tmpHeight;
-        wave_bg.setLayoutParams(waveLP);
+        waveBg.setLayoutParams(waveLP);
 
-        wave_bg.setWidth(windowWidth);
-        wave_bg.setHeight(tmpHeight);
-        wave_bg.setWavingWay(WaveView.MOVE_FROM_RIGHT_TO_LEFT);
-        wave_bg.setWaveHeight(0.8f);
-        wave_bg.setWaveSpeed(45);
-        wave_bg.setWaveWidth(1.7f);
-        wave_bg.setWaveCrest(0.1f);
-        wave_bg.setColor(contentView.getResources().getColor(R.color.clr_white));
-        wave_bg.setAlpha(0.3f);
-        wave_bg.setFloatingWay(WaveView.FLOAT_DOWN);
-        wave_bg.setMaxWaveHeight(0.8f);
-        wave_bg.setMinWaveHeight(0.1f);
-        wave_bg.startWaving();
+        waveBg.setWidth(windowWidth);
+        waveBg.setHeight(tmpHeight);
+        waveBg.setWavingWay(WaveView.MOVE_FROM_RIGHT_TO_LEFT);
+        waveBg.setWaveHeight(0.8f);
+        waveBg.setWaveSpeed(45);
+        waveBg.setWaveWidth(1.7f);
+        waveBg.setWaveCrest(0.1f);
+        waveBg.setColor(contentView.getResources().getColor(R.color.clr_white));
+        waveBg.setAlpha(0.3f);
+        waveBg.setFloatingWay(WaveView.FLOAT_DOWN);
+        waveBg.setMaxWaveHeight(0.8f);
+        waveBg.setMinWaveHeight(0.1f);
+        waveBg.startWaving();
 
-        iv_color_bg = (ImageView) contentView.findViewById(R.id.iv_task_detail_colog_bg);
-        iv_color_bg.setBackgroundColor(contentView.getResources().getColor(R.color.clr_12_15));
+        ivColorBg = (ImageView) contentView.findViewById(R.id.iv_task_detail_colog_bg);
+        ivColorBg.setBackgroundColor(contentView.getResources().getColor(R.color.clr_12_15));
 
-        android.widget.FrameLayout.LayoutParams ivLP = (android.widget.FrameLayout.LayoutParams) iv_color_bg.getLayoutParams();
+        android.widget.FrameLayout.LayoutParams ivLP = (android.widget.FrameLayout.LayoutParams) ivColorBg.getLayoutParams();
         ivLP.width = windowWidth;
         ivLP.height = tmpHeight;
-        iv_color_bg.setLayoutParams(ivLP);
+        ivColorBg.setLayoutParams(ivLP);
 
-        ly_task_info = (RelativeLayout) contentView.findViewById(R.id.ly_task_detail_info);
-        android.widget.FrameLayout.LayoutParams rLP = (android.widget.FrameLayout.LayoutParams) ly_task_info.getLayoutParams();
+        lyTaskInfo = (RelativeLayout) contentView.findViewById(R.id.ly_task_detail_info);
+        android.widget.FrameLayout.LayoutParams rLP = (android.widget.FrameLayout.LayoutParams) lyTaskInfo.getLayoutParams();
         rLP.width = windowWidth;
         rLP.height = tmpHeight;
-        ly_task_info.setLayoutParams(rLP);
+        lyTaskInfo.setLayoutParams(rLP);
 
-        ly_task_confirm = (RelativeLayout) contentView.findViewById(R.id.ly_task_detail_confirm);
-        tv_confirm = (TextView) contentView.findViewById(R.id.tv_task_detail_confirm);
-        tv_percent = (TextView) contentView.findViewById(R.id.tv_task_detail_percent);
-        tv_title = (TextView) contentView.findViewById(R.id.tv_task_detail_title);
-        iv_confirm = (ImageView) contentView.findViewById(R.id.iv_task_detail_confirm);
+        lyTaskConfirm = (RelativeLayout) contentView.findViewById(R.id.ly_task_detail_confirm);
+        tvConfirm = (TextView) contentView.findViewById(R.id.tv_task_detail_confirm);
+        tvPercent = (TextView) contentView.findViewById(R.id.tv_task_detail_percent);
+        tvTitle = (TextView) contentView.findViewById(R.id.tv_task_detail_title);
+        ivConfirm = (ImageView) contentView.findViewById(R.id.iv_task_detail_confirm);
 
+        tvTitle.setText(task.getTaskDesc());
         // 启动百分比更新计时器,时间间隔1.5s
         timer.schedule(updateTimeTask, 0, 1500);
     }
@@ -158,6 +168,7 @@ public class TaskDetailPopupWindow implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ly_task_detail_confirm: {
+                isFinished = true;
                 window.dismiss();
                 break;
             }
@@ -206,7 +217,7 @@ public class TaskDetailPopupWindow implements OnClickListener {
         }
 
         if (isSetup) {
-            iv_color_bg.setBackgroundColor(colorNow);
+            ivColorBg.setBackgroundColor(colorNow);
             isSetup = false;
         } else {
             ValueAnimator color_bg_anim = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
@@ -215,18 +226,58 @@ public class TaskDetailPopupWindow implements OnClickListener {
 
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
-                    iv_color_bg.setBackgroundColor((int) animation.getAnimatedValue());
+                    ivColorBg.setBackgroundColor((int) animation.getAnimatedValue());
                 }
             });
             color_bg_anim.start();
         }
     }
 
-    ;
-
     private void updateInfo(float percent) {
-        tv_percent.setText((int) percent + "%");
+        tvPercent.setText((int) percent + "%");
         updateBackgroundColor((int) percent);
-        wave_bg.setWaveHeight(0.1f + 0.7f * percent / 100);
+        waveBg.setWaveHeight(0.1f + 0.7f * percent / 100);
+    }
+
+    /**
+     * 返回一个task的完成度
+     *
+     * @param task
+     * @return
+     * @author 钟毅凯
+     */
+    private float getPercentage(TaskData task) {
+        try {
+            DateFormat dateToMillis = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            long currentMillis = System.currentTimeMillis();
+            long startMillis = dateToMillis.parse(task.getStartYear() + "-" + task.getStartMonth() + "-" + task.getStartDay() + " " + task.getStartHour() + ":" + task.getStartMinute() + ":00").getTime();
+            long durationMillis = dateToMillis.parse("1970-01-" + (task.getLimitDay() + 1) + " " + task.getLimitHour() + ":" + task.getLimitMinute() + ":00").getTime() - dateToMillis.parse("1970-01-01 00:00:00").getTime();
+            long remainMillis = durationMillis - currentMillis + startMillis;
+            if (startMillis < currentMillis)
+                return 100 * (remainMillis > 0 ? remainMillis / (float) durationMillis : 0f);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 100f;
+    }
+
+    /**
+     * 返回该popupwindow所对应的task是否已经完成，只有在用户点击“任务完成”按钮后返回值为真
+     *
+     * @return
+     * @author 钟毅凯
+     */
+    public boolean isTaskFinished() {
+        return isFinished;
+    }
+
+    /**
+     * 返回该popupwindow所对应的task
+     *
+     * @return
+     * @author 钟毅凯
+     */
+    public TaskData getTask() {
+        return this.task;
     }
 }
