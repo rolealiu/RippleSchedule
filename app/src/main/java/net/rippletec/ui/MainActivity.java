@@ -1,7 +1,6 @@
 package net.rippletec.ui;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -17,7 +16,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.format.Time;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,9 +23,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.rippletec.adapter.TaskListAdapter;
+import net.rippletec.dao.DBHelper;
 import net.rippletec.dao.TaskData;
 import net.rippletec.layout.AddTaskPopupWindow;
 import net.rippletec.layout.FloatingActionButton;
@@ -46,6 +44,7 @@ import net.rippletec.ui.base.ActivityBase;
  * @updateDate 2016/02/12
  */
 public class MainActivity extends ActivityBase implements OnClickListener, ListRecyclerView.OnItemClickListener {
+    private List<TaskData> taskList;
     private ObjectAnimator fabHideAnim;
     private ObjectAnimator fabShowAnim;
     private AddTaskPopupWindow addTaskPopupWindow;
@@ -131,23 +130,22 @@ public class MainActivity extends ActivityBase implements OnClickListener, ListR
 
         // 初始化任务列表
         rvTask = (ListRecyclerView) findViewById(R.id.rv_main_task);
-        ArrayList<TaskData> itemList = new ArrayList<TaskData>();
-        for (int i = 0; i < 4; i++) {
-            TaskData task = new TaskData();
-            task.setTaskDesc("task " + i);
-            task.setSignalColor(0xff000000);
-            task.setStartYear(2016);
-            task.setStartMonth(2);
-            task.setStartDay(12+ i);
-            task.setStartHour(14+i);
-            task.setStartMinute(20+i*5);
-            task.setLimitHour(i%3);
-            task.setLimitHour(i*2);
-            task.setLimitMinute(i*12);
-            itemList.add(task);
-        }
-        adtTask = new TaskListAdapter(this, itemList, rvTask);
+        DBHelper database = new DBHelper(MainActivity.this);
+        taskList = database.queryAllTask();
+        adtTask = new TaskListAdapter(this, taskList, rvTask);
+        database.close();
         rvTask.setAdapter(adtTask);
+    }
+
+    /**
+     * 为了保证流畅，只在程序stop时更新数据库
+     */
+    @Override
+    protected void onStop() {
+        DBHelper db = new DBHelper(this);
+        db.updateTask(taskList);
+        db.close();
+        super.onStop();
     }
 
     @Override
@@ -333,7 +331,7 @@ public class MainActivity extends ActivityBase implements OnClickListener, ListR
         int screenWidth = (int) (ScreenModule.getScreenWidthPX(this) * 0.9);
         int screenHeight = (int) (ScreenModule.getScreenHeightPX(this) * 0.7);
         if (taskDetailPopupWindow == null) {
-            taskDetailPopupWindow = new TaskDetailPopupWindow(this, R.layout.ly_task_detail, screenWidth, screenHeight,adtTask.getItem(position));
+            taskDetailPopupWindow = new TaskDetailPopupWindow(this, R.layout.ly_task_detail, screenWidth, screenHeight, adtTask.getItem(position));
         }
 
         // 设置背景遮罩动画
@@ -467,7 +465,7 @@ public class MainActivity extends ActivityBase implements OnClickListener, ListR
                 alphaAnimatorSet.start();
                 //popupwindow关闭时查看是否有返回结果
                 if (addTaskPopupWindow.getResult() != null)
-                    adtTask.addItem(addTaskPopupWindow.getResult(),0);
+                    adtTask.addItem(addTaskPopupWindow.getResult(), 0);
             }
         });
     }

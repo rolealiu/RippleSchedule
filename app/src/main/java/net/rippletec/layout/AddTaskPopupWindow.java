@@ -313,6 +313,7 @@ public class AddTaskPopupWindow implements OnClickListener {
         switch (v.getId()) {
             case R.id.ly_add_task_confirm: {
                 task = new TaskData();
+                task.setId(System.currentTimeMillis());
                 task.setTaskDesc(etTaskDesc.getText().toString());
                 task.setStartYear(startYear);
                 task.setStartMonth(startMonth);

@@ -42,11 +42,11 @@ public class InitialActivity extends ActivityBase
 	}
 
 	/**
-	 * 倒计时2s进入程序
+	 * 倒计时0.5s进入程序
 	 */
 	private void timeCountDown()
 	{
-		CountDownTimer timer = new CountDownTimer(1000, 1000)
+		CountDownTimer timer = new CountDownTimer(500, 500)
 		{
 
 			@Override

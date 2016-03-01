@@ -8,6 +8,9 @@ package net.rippletec.dao;
  */
 public class TaskData {
 
+    //任务的id，用创建时的毫秒数表示
+    private long id;
+
     //任务描述
     private String taskDesc;
 
@@ -25,6 +28,10 @@ public class TaskData {
 
     //颜色标记
     private int signalColor;
+
+    public TaskData(){
+        this.id = System.currentTimeMillis();
+    }
 
     public int getStartYear() {
         return startYear;
@@ -106,4 +113,11 @@ public class TaskData {
         this.startMonth = startMonth;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }
