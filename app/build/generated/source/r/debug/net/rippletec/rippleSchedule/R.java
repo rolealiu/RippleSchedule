@@ -1899,18 +1899,19 @@ containing a value of this type.
         public static final int txt_remain_time=0x7f05001c;
         public static final int txt_remaining_time_title=0x7f05001d;
         public static final int txt_second=0x7f05001e;
-        public static final int txt_task_color_singal=0x7f05001f;
-        public static final int txt_task_confirm=0x7f050020;
-        public static final int txt_task_duration_time=0x7f050021;
-        public static final int txt_task_finish=0x7f050022;
-        public static final int txt_task_name=0x7f050023;
-        public static final int txt_task_start_date=0x7f050024;
-        public static final int txt_task_start_time=0x7f050025;
-        public static final int txt_task_title_hint=0x7f050026;
-        public static final int txt_time_hour_signal=0x7f050027;
-        public static final int txt_time_minute_signal=0x7f050028;
-        public static final int txt_time_second_signal=0x7f050029;
-        public static final int txt_year=0x7f05002a;
+        public static final int txt_task_begin_notification=0x7f05001f;
+        public static final int txt_task_color_singal=0x7f050020;
+        public static final int txt_task_confirm=0x7f050021;
+        public static final int txt_task_duration_time=0x7f050022;
+        public static final int txt_task_finish=0x7f050023;
+        public static final int txt_task_name=0x7f050024;
+        public static final int txt_task_start_date=0x7f050025;
+        public static final int txt_task_start_time=0x7f050026;
+        public static final int txt_task_title_hint=0x7f050027;
+        public static final int txt_time_hour_signal=0x7f050028;
+        public static final int txt_time_minute_signal=0x7f050029;
+        public static final int txt_time_second_signal=0x7f05002a;
+        public static final int txt_year=0x7f05002b;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f07007b;

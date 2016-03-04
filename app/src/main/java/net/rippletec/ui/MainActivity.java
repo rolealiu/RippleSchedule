@@ -1,5 +1,8 @@
 package net.rippletec.ui;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -11,6 +14,8 @@ import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,6 +37,7 @@ import net.rippletec.layout.FloatingActionButton;
 import net.rippletec.layout.ListRecyclerView;
 import net.rippletec.layout.TaskDetailPopupWindow;
 import net.rippletec.module.ImageModule;
+import net.rippletec.module.NotificationModule;
 import net.rippletec.module.ScreenModule;
 import net.rippletec.rippleSchedule.R;
 import net.rippletec.ui.base.ActivityBase;
@@ -137,17 +143,6 @@ public class MainActivity extends ActivityBase implements OnClickListener, ListR
         rvTask.setAdapter(adtTask);
     }
 
-    /**
-     * 为了保证流畅，只在程序stop时更新数据库
-     */
-    @Override
-    protected void onStop() {
-        DBHelper db = new DBHelper(this);
-        db.updateTask(taskList);
-        db.close();
-        super.onStop();
-    }
-
     @Override
     protected void initialListener() {
         fabHideAnim = ObjectAnimator.ofFloat(ivFab, "alpha", 1.0f, 0.0f).setDuration(200);
@@ -220,6 +215,24 @@ public class MainActivity extends ActivityBase implements OnClickListener, ListR
         });
 
         ivFab.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onPause() {
+        // 程序启动时取消所有已显示的Notification
+        NotificationModule.cancelAllNotification(this);
+        super.onPause();
+    }
+
+    /**
+     * 为了保证流畅，只在程序stop时更新数据库
+     */
+    @Override
+    protected void onStop() {
+        DBHelper db = new DBHelper(this);
+        db.updateTask(taskList);
+        db.close();
+        super.onStop();
     }
 
     /**
@@ -464,10 +477,31 @@ public class MainActivity extends ActivityBase implements OnClickListener, ListR
                 });
                 alphaAnimatorSet.start();
                 //popupwindow关闭时查看是否有返回结果
-                if (addTaskPopupWindow.getResult() != null)
+                if (addTaskPopupWindow.getResult() != null) {
                     adtTask.addItem(addTaskPopupWindow.getResult(), 0);
+                    showNotification(addTaskPopupWindow.getResult());
+                }
             }
         });
+    }
+
+    /**
+     * 定时显示一个任务的Notification
+     *
+     * @param task
+     */
+    private void showNotification(TaskData task) {
+        DateFormat dateToMillis = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        long startMillis = 0;
+        try {
+            startMillis = dateToMillis.parse(task.getStartYear() + "-" + task.getStartMonth() + "-" + task.getStartDay() + " " + task.getStartHour() + ":" + task.getStartMinute() + ":00").getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Intent click = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, (int) task.getId(), click, PendingIntent.FLAG_UPDATE_CURRENT);
+        String taskBegin = getResources().getString(R.string.txt_task_begin_notification);
+        NotificationModule.showNotification(this, R.drawable.ic_launcher, taskBegin, taskBegin, task.getTaskDesc(), (int) task.getId(), startMillis, pendingIntent);
     }
 
 }

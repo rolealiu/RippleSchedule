@@ -254,7 +254,7 @@
     <string name="abc_toolbar_collapse_description">Collapse</string>
     <!-- From: file:/G:/AndroidStudioProjects/RippleSchedule/app/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="app_name">rippleSchedule</string>
+    <string name="app_name">RippleSchedule</string>
     <!-- From: file:/G:/AndroidStudioProjects/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/values/values.xml -->
     <eat-comment/>
     <string name="status_bar_notification_info_overflow">999+</string>
@@ -272,6 +272,7 @@
     <string name="txt_remain_time">剩下</string>
     <string name="txt_remaining_time_title">距离今日结束：</string>
     <string name="txt_second">秒</string>
+    <string name="txt_task_begin_notification">计划已开始</string>
     <string name="txt_task_color_singal">颜色标记</string>
     <string name="txt_task_confirm">确认添加</string>
     <string name="txt_task_duration_time">任务期限</string>

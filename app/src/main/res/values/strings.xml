@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">rippleSchedule</string>
+    <string name="app_name">RippleSchedule</string>
     <string name="txt_header_title">RIPPLE SCHEDULE</string>
     <string name="txt_remain_time">剩下</string>
     <string name="txt_year">年</string>
@@ -26,5 +26,6 @@
     <string name="txt_task_start_time">开始时间</string>
     <string name="txt_task_duration_time">任务期限</string>
     <string name="txt_task_color_singal">颜色标记</string>
+    <string name="txt_task_begin_notification">计划已开始</string>
 
 </resources>
