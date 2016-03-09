@@ -8,7 +8,9 @@ import net.rippletec.rippleSchedule.R;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.Animator.AnimatorListener;
+import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.text.format.Time;
@@ -21,6 +23,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager.LayoutParams;
+import android.view.animation.AnimationSet;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -36,7 +39,7 @@ import android.widget.Toast;
  *
  * @author rolealiu 刘昊臻
  * @editor 钟毅凯
- * @updateDate 2016/02/11
+ * @updateDate 2016/03/09
  */
 public class AddTaskPopupWindow implements OnClickListener {
     private static final int[] CLR_SIGNAL = {0xff000000, 0xFFAF4EF3, 0xFF4ED1F3, 0xFF9ACB59, 0xFFFDDD43, 0xFFEE5261};
@@ -312,19 +315,24 @@ public class AddTaskPopupWindow implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ly_add_task_confirm: {
-                task = new TaskData();
-                task.setId(System.currentTimeMillis());
-                task.setTaskDesc(etTaskDesc.getText().toString());
-                task.setStartYear(startYear);
-                task.setStartMonth(startMonth);
-                task.setStartDay(startDay);
-                task.setStartHour(wvStartTimeHour.getCurrentItemIndex());
-                task.setStartMinute(wvStartTimeMinutes.getCurrentItemIndex());
-                task.setLimitDay(wvDurationDays.getCurrentItemIndex());
-                task.setLimitHour(wvDurationHours.getCurrentItemIndex());
-                task.setLimitMinute(wvDurationMinutes.getCurrentItemIndex());
-                task.setSignalColor(CLR_SIGNAL[chosenSignalClr]);
-                window.dismiss();
+                if (etTaskDesc.getText().toString() == null || "".equals(etTaskDesc.getText().toString())) {
+                    task = null;
+                    remindTheEmptyDesc();
+                } else {
+                    task = new TaskData();
+                    task.setId(System.currentTimeMillis());
+                    task.setTaskDesc(etTaskDesc.getText().toString());
+                    task.setStartYear(startYear);
+                    task.setStartMonth(startMonth);
+                    task.setStartDay(startDay);
+                    task.setStartHour(wvStartTimeHour.getCurrentItemIndex());
+                    task.setStartMinute(wvStartTimeMinutes.getCurrentItemIndex());
+                    task.setLimitDay(wvDurationDays.getCurrentItemIndex());
+                    task.setLimitHour(wvDurationHours.getCurrentItemIndex());
+                    task.setLimitMinute(wvDurationMinutes.getCurrentItemIndex());
+                    task.setSignalColor(CLR_SIGNAL[chosenSignalClr]);
+                    window.dismiss();
+                }
                 break;
             }
             case R.id.ly_add_task_startDate: {
@@ -434,6 +442,38 @@ public class AddTaskPopupWindow implements OnClickListener {
         updateTaskData();
     }
 
+    //保存原来EditText的hintColor
+    private int currentHintColor = -1;
+
+    /**
+     * 提醒用户任务描述未填写
+     */
+    private void remindTheEmptyDesc() {
+        if (currentHintColor == -1)
+            currentHintColor = etTaskDesc.getCurrentHintTextColor();
+        ValueAnimator hintColorAnim1 = ValueAnimator.ofObject(new ArgbEvaluator(), currentHintColor, 0xffee2222);
+        hintColorAnim1.setDuration(200);
+        hintColorAnim1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                etTaskDesc.setHintTextColor((int) animation.getAnimatedValue());
+            }
+        });
+        ValueAnimator hintColorAnim2 = ValueAnimator.ofObject(new ArgbEvaluator(), 0xffee2222, currentHintColor);
+        hintColorAnim2.setDuration(200);
+        hintColorAnim2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                etTaskDesc.setHintTextColor((int) animation.getAnimatedValue());
+            }
+        });
+        AnimatorSet set = new AnimatorSet();
+        set.play(hintColorAnim2).after(hintColorAnim1);
+        set.start();
+    }
+
     /**
      * 关闭选择器时更新显示的数字
      */
@@ -507,6 +547,7 @@ public class AddTaskPopupWindow implements OnClickListener {
 
     /**
      * 获取要增加的task，只有在用户点击“确认添加”按钮后才会返回非空对象
+     *
      * @return
      */
     public TaskData getResult() {

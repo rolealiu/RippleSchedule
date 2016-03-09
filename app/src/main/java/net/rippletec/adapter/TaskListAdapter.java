@@ -23,7 +23,7 @@ import java.util.List;
  * 主界面RecyclerView的adapter
  *
  * @author 钟毅凯
- * @updateDate 2016/02/12
+ * @updateDate 2016/03/09
  */
 public class TaskListAdapter extends RecyclerView.Adapter {
     private Context context;
@@ -31,7 +31,7 @@ public class TaskListAdapter extends RecyclerView.Adapter {
     private RecyclerView recyclerView;
     private List<TaskData> itemList;
 
-    public TaskListAdapter(Context context, List<TaskData> taskList, RecyclerView recyclerView) {
+    public TaskListAdapter(Context context, final List<TaskData> taskList, RecyclerView recyclerView) {
         super();
         this.context = context;
         this.lyInflater = LayoutInflater.from(context);
@@ -48,8 +48,7 @@ public class TaskListAdapter extends RecyclerView.Adapter {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                itemList.remove(viewHolder.getAdapterPosition());
-                notifyItemRemoved(viewHolder.getAdapterPosition());
+                removeItem(taskList.get(viewHolder.getAdapterPosition()));
             }
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
@@ -69,6 +68,7 @@ public class TaskListAdapter extends RecyclerView.Adapter {
         itemHolder.tvTaskTitle.setText(task.getTaskDesc());
         itemHolder.tvTaskTitle.setTextColor(task.getSignalColor());
 
+        final String strRemainTimeToStart = context.getResources().getString(R.string.txt_remain_time_to_start);
         final String strRemainTime = context.getResources().getString(R.string.txt_remain_time);
         final String strDay = context.getResources().getString(R.string.txt_day);
         final String strHour = context.getResources().getString(R.string.txt_hour);
@@ -79,8 +79,8 @@ public class TaskListAdapter extends RecyclerView.Adapter {
             long currentMillis = System.currentTimeMillis();
             long startMillis = dateToMillis.parse(task.getStartYear() + "-" + task.getStartMonth() + "-" + task.getStartDay() + " " + task.getStartHour() + ":" + task.getStartMinute() + ":00").getTime();
             long durationMillis = dateToMillis.parse("1970-01-" + (task.getLimitDay() + 1) + " " + task.getLimitHour() + ":" + task.getLimitMinute() + ":00").getTime() - dateToMillis.parse("1970-01-01 00:00:00").getTime();
-            long remainMillis = durationMillis - currentMillis + startMillis;
             if (currentMillis > startMillis) {
+                long remainMillis = durationMillis - currentMillis + startMillis;
                 itemHolder.tvRemainTime.setText(strRemainTime + remainMillis / 1000 / 60 / 60 / 24 + strDay + remainMillis / 1000 / 60 / 60 % 24 + strHour + remainMillis / 1000 / 60 % 60 + strMinute);
                 switch ((int) (10 * (remainMillis / (double) durationMillis))) {
                     case 10:
@@ -110,8 +110,9 @@ public class TaskListAdapter extends RecyclerView.Adapter {
                         break;
                 }
             } else {
+                long remainMillis = -currentMillis + startMillis;
                 itemHolder.ivProgress.setImageResource(R.drawable.img_task_90);
-                itemHolder.tvRemainTime.setText(strRemainTime + task.getLimitDay() + strDay + task.getLimitHour() + strHour + task.getLimitMinute() + strMinute);
+                itemHolder.tvRemainTime.setText(strRemainTimeToStart + remainMillis / 1000 / 60 / 60 / 24 + strDay + remainMillis / 1000 / 60 / 60 % 24 + strHour + remainMillis / 1000 / 60 % 60 + strMinute);
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -142,6 +143,7 @@ public class TaskListAdapter extends RecyclerView.Adapter {
         itemList.add(index, task);
         notifyItemInserted(index);
         recyclerView.scrollToPosition(index);
+        DBHelper.addSingleTask(context, task);
     }
 
     /**
@@ -152,6 +154,7 @@ public class TaskListAdapter extends RecyclerView.Adapter {
     public void removeItem(TaskData task) {
         notifyItemRemoved(itemList.indexOf(task));
         itemList.remove(task);
+        DBHelper.removeTask(context, task.getId());
     }
 
     private static final class ItemViewHolder extends RecyclerView.ViewHolder {

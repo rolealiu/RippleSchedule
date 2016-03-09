@@ -37,6 +37,7 @@ import net.rippletec.layout.FloatingActionButton;
 import net.rippletec.layout.ListRecyclerView;
 import net.rippletec.layout.TaskDetailPopupWindow;
 import net.rippletec.module.ImageModule;
+import net.rippletec.module.InitialModule;
 import net.rippletec.module.NotificationModule;
 import net.rippletec.module.ScreenModule;
 import net.rippletec.rippleSchedule.R;
@@ -136,10 +137,29 @@ public class MainActivity extends ActivityBase implements OnClickListener, ListR
 
         // 初始化任务列表
         rvTask = (ListRecyclerView) findViewById(R.id.rv_main_task);
-        DBHelper database = new DBHelper(MainActivity.this);
-        taskList = database.queryAllTask();
+        taskList = DBHelper.queryAllTask(this);
+        if (taskList.size() == 0 && InitialModule.isFirstLaunch(this)) {
+            for (int i = 0; i < 2; i++) {
+                Time time = new Time();
+                time.setToNow();
+                TaskData task = new TaskData();
+                task.setId(System.currentTimeMillis() - i);
+                task.setStartYear(time.year);
+                task.setStartMonth(time.month + 1);
+                task.setStartDay(time.monthDay);
+                task.setStartHour(time.hour);
+                task.setStartMinute(time.minute + 2);
+                task.setLimitDay(0);
+                task.setLimitHour(0);
+                task.setLimitMinute(3);
+                taskList.add(task);
+            }
+            taskList.get(0).setTaskDesc("Ripple");
+            taskList.get(1).setTaskDesc("Schedule");
+            taskList.get(0).setSignalColor(0xFF4ED1F3);
+            taskList.get(1).setSignalColor(0xFFAF4EF3);
+        }
         adtTask = new TaskListAdapter(this, taskList, rvTask);
-        database.close();
         rvTask.setAdapter(adtTask);
     }
 
@@ -229,9 +249,7 @@ public class MainActivity extends ActivityBase implements OnClickListener, ListR
      */
     @Override
     protected void onStop() {
-        DBHelper db = new DBHelper(this);
-        db.updateTask(taskList);
-        db.close();
+        DBHelper.updateTask(this, taskList);
         super.onStop();
     }
 
@@ -501,7 +519,7 @@ public class MainActivity extends ActivityBase implements OnClickListener, ListR
         Intent click = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, (int) task.getId(), click, PendingIntent.FLAG_UPDATE_CURRENT);
         String taskBegin = getResources().getString(R.string.txt_task_begin_notification);
-        NotificationModule.showNotification(this, R.drawable.ic_launcher, taskBegin, taskBegin, task.getTaskDesc(), (int) task.getId(), startMillis, pendingIntent);
+        NotificationModule.showNotification(this, R.drawable.ic_launcher, taskBegin, taskBegin, task.getTaskDesc(), task.getId(), startMillis, pendingIntent);
     }
 
 }

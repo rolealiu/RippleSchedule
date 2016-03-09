@@ -3,6 +3,7 @@
 
     <string name="app_name">RippleSchedule</string>
     <string name="txt_header_title">RIPPLE SCHEDULE</string>
+    <string name="txt_remain_time_to_start">距离开始还有</string>
     <string name="txt_remain_time">剩下</string>
     <string name="txt_year">年</string>
     <string name="txt_month">月</string>
