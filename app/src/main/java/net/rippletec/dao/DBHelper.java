@@ -14,7 +14,7 @@ import java.util.List;
  * 数据库操作类
  *
  * @author 钟毅凯
- * @version 2016/03/01
+ * @version 2016/03/09
  */
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -22,7 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final int DB_VERSION = 1;
     private static final String TABLE_NAME = "task";
 
-    public DBHelper(Context context) {
+    private DBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
@@ -43,8 +43,19 @@ public class DBHelper extends SQLiteOpenHelper {
      *
      * @param task
      */
+    public static void addSingleTask(Context context, TaskData task) {
+        DBHelper helper = new DBHelper(context);
+        helper.addTask(task);
+        helper.close();
+    }
+
+    /**
+     * 向数据库中添加一个任务
+     *
+     * @param task
+     */
     public void addTask(TaskData task) {
-        SQLiteDatabase database = getWritableDatabase();
+        SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("id", String.valueOf(task.getId()));
         values.put("desc", task.getTaskDesc());
@@ -66,10 +77,29 @@ public class DBHelper extends SQLiteOpenHelper {
      *
      * @param taskId
      */
-    public void removeTask(long taskId) {
-        SQLiteDatabase database = getWritableDatabase();
+    public static void removeTask(Context context, long taskId) {
+        DBHelper helper = new DBHelper(context);
+        SQLiteDatabase database = helper.getWritableDatabase();
         database.execSQL("delete from " + TABLE_NAME + " where id  = " + taskId);
         database.close();
+        helper.close();
+    }
+
+    /**
+     * 判断该id所指任务是否存在
+     *
+     * @param taskId
+     * @return
+     */
+    public static boolean isExist(Context context, long taskId) {
+        DBHelper helper = new DBHelper(context);
+        SQLiteDatabase database = helper.getReadableDatabase();
+        Cursor cursor = database.query(TABLE_NAME, null, "id = ?", new String[]{String.valueOf(taskId)}, null, null, null);
+        boolean isExist = cursor.getCount() > 0;
+        cursor.close();
+        database.close();
+        helper.close();
+        return isExist;
     }
 
     /**
@@ -77,9 +107,10 @@ public class DBHelper extends SQLiteOpenHelper {
      *
      * @return
      */
-    public List<TaskData> queryAllTask() {
-        List<TaskData> list = new ArrayList<>();
-        Cursor cursor = getReadableDatabase().query(TABLE_NAME, null, null, null, null, null, null);
+    public static ArrayList<TaskData> queryAllTask(Context context) {
+        ArrayList<TaskData> list = new ArrayList<>();
+        DBHelper helper = new DBHelper(context);
+        Cursor cursor = helper.getReadableDatabase().query(TABLE_NAME, null, null, null, null, null, null);
         for (int i = 0; i < cursor.getCount(); ++i) {
             cursor.moveToPosition(i);
             TaskData task = new TaskData();
@@ -97,6 +128,7 @@ public class DBHelper extends SQLiteOpenHelper {
             list.add(task);
         }
         cursor.close();
+        helper.close();
         Collections.reverse(list);
         return list;
     }
@@ -106,11 +138,13 @@ public class DBHelper extends SQLiteOpenHelper {
      *
      * @param taskList
      */
-    public void updateTask(List<TaskData> taskList) {
-        SQLiteDatabase database = getWritableDatabase();
+    public static void updateTask(Context context, List<TaskData> taskList) {
+        DBHelper helper = new DBHelper(context);
+        SQLiteDatabase database = helper.getWritableDatabase();
         database.execSQL("delete from " + TABLE_NAME);
-        for (int i = taskList.size() - 1; i >= 0; --i)
-            addTask(taskList.get(i));
         database.close();
+        for (int i = taskList.size() - 1; i >= 0; --i)
+            helper.addTask(taskList.get(i));
+        helper.close();
     }
 }
