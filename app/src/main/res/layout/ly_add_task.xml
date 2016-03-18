@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<net.rippletec.layout.DispatchTouchFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusable="true"
@@ -335,38 +335,52 @@
             </LinearLayout>
         </FrameLayout>
 
-        <RelativeLayout
-            android:id="@+id/ly_add_task_confirm"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:background="@drawable/shp_border_top"
-            android:clickable="true">
+            android:layout_height="75dp">
 
-            <TextView
-                android:id="@+id/tv_add_task_confirm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_margin="12dp"
-                android:shadowColor="@color/clr_text_shadow"
-                android:shadowDx="0"
-                android:shadowDy="3"
-                android:shadowRadius="5"
-                android:text="@string/txt_task_confirm"
-                android:textColor="@color/clr_text_confirm_n"
-                android:textSize="22sp" />
+
+            <RelativeLayout
+                android:id="@+id/ly_add_task_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shp_border_top"
+                android:clickable="true">
+
+                <TextView
+                    android:id="@+id/tv_add_task_confirm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="12dp"
+                    android:shadowColor="@color/clr_text_shadow"
+                    android:shadowDx="0"
+                    android:shadowDy="3"
+                    android:shadowRadius="5"
+                    android:text="@string/txt_task_confirm"
+                    android:textColor="@color/clr_text_confirm_n"
+                    android:textSize="22sp" />
+
+                <ImageView
+                    android:id="@+id/iv_add_task_confirm"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="12dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/img_task_confirm_n" />
+            </RelativeLayout>
 
             <ImageView
-                android:id="@+id/iv_add_task_confirm"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_margin="12dp"
+                android:id="@+id/ly_add_task_back"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
                 android:scaleType="centerInside"
-                android:src="@drawable/img_task_confirm_n" />
-        </RelativeLayout>
-
+                android:src="@drawable/img_return_grey_cir"
+                android:visibility="gone" />
+        </FrameLayout>
     </LinearLayout>
-</net.rippletec.layout.DispatchTouchFrameLayout>
+</FrameLayout>

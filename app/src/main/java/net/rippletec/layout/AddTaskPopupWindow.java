@@ -12,7 +12,6 @@ import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.text.format.Time;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -23,7 +22,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager.LayoutParams;
-import android.view.animation.AnimationSet;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,14 +30,13 @@ import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * 添加任务弹出窗口
  *
  * @author rolealiu 刘昊臻
  * @editor 钟毅凯
- * @updateDate 2016/03/09
+ * @updateDate 2016/03/18
  */
 public class AddTaskPopupWindow implements OnClickListener {
     private static final int[] CLR_SIGNAL = {0xff000000, 0xFFAF4EF3, 0xFF4ED1F3, 0xFF9ACB59, 0xFFFDDD43, 0xFFEE5261};
@@ -60,6 +57,7 @@ public class AddTaskPopupWindow implements OnClickListener {
     private RelativeLayout lyConfirm;
     private TextView tvConfirm;
     private ImageView ivConfirm;
+    private ImageView ivBackBtn;
     private RelativeLayout lySetStartDate;
     private RelativeLayout lySetStartTime;
     private RelativeLayout lySetDuration;
@@ -105,6 +103,8 @@ public class AddTaskPopupWindow implements OnClickListener {
         lyConfirm = (RelativeLayout) contentView.findViewById(R.id.ly_add_task_confirm);
         tvConfirm = (TextView) contentView.findViewById(R.id.tv_add_task_confirm);
         ivConfirm = (ImageView) contentView.findViewById(R.id.iv_add_task_confirm);
+
+        ivBackBtn = (ImageView) contentView.findViewById(R.id.ly_add_task_back);
 
         lySetStartDate = (RelativeLayout) contentView.findViewById(R.id.ly_add_task_startDate);
         lySetStartTime = (RelativeLayout) contentView.findViewById(R.id.ly_add_task_startTime);
@@ -219,36 +219,11 @@ public class AddTaskPopupWindow implements OnClickListener {
             }
         });
 
+        ivBackBtn.setOnClickListener(this);
+
         lySetStartDate.setOnClickListener(this);
         lySetStartTime.setOnClickListener(this);
         lySetDuration.setOnClickListener(this);
-
-        //监听手势，向右滑返回
-        ((DispatchTouchFrameLayout) contentView).setOnDispatchTouchEventListener(new DispatchTouchFrameLayout.OnDispatchTouchEventListener() {
-            private float downX;
-
-            @Override
-            public void onDispatchTouchhEvent(MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        downX = event.getX();
-                        mVelocityTracker.clear();
-                        mVelocityTracker.addMovement(event);
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        mVelocityTracker.addMovement(event);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        mVelocityTracker.computeCurrentVelocity(1000);
-                        if (mVelocityTracker.getXVelocity() > 70 && event.getX() > downX && event.getX() - downX > 200 && mVelocityTracker.getYVelocity() < 50) {
-                            backToHomePage();
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
 
         //监听选择开始日期
         cvStartDate.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -350,6 +325,9 @@ public class AddTaskPopupWindow implements OnClickListener {
                 currentPage = DURATION_PAGE;
                 break;
             }
+            case R.id.ly_add_task_back:
+                backToHomePage();
+                break;
             default:
                 break;
         }
@@ -366,12 +344,20 @@ public class AddTaskPopupWindow implements OnClickListener {
         ObjectAnimator anim1 = ObjectAnimator.ofFloat(before, "alpha", 1.0f, 0.0f).setDuration(350);
         ObjectAnimator anim2 = ObjectAnimator.ofFloat(picker, "alpha", 0.0f, 1.0f).setDuration(350);
         ObjectAnimator anim3 = ObjectAnimator.ofFloat(picker, "translationX", 300f, 0.0f).setDuration(350);
-        anims.play(anim1).with(anim2).with(anim3);
+
+        //让返回键显示出来
+        ObjectAnimator backAnim1 = ObjectAnimator.ofFloat(ivBackBtn, "alpha", 0f, 1f).setDuration(350);
+        ObjectAnimator backAnim2 = ObjectAnimator.ofFloat(ivBackBtn, "translationY", 150f, 0f).setDuration(300);
+        ObjectAnimator backAnim3 = ObjectAnimator.ofFloat(lyConfirm, "alpha", 1f, 0f).setDuration(200);
+
+        anims.play(anim1).with(anim2).with(anim3).with(backAnim1).with(backAnim2).with(backAnim3);
         anims.addListener(new AnimatorListener() {
 
             @Override
             public void onAnimationStart(Animator animation) {
                 picker.setVisibility(View.VISIBLE);
+                ivBackBtn.setVisibility(View.VISIBLE);
+                lyConfirm.setFocusable(false);
             }
 
             @Override
@@ -382,6 +368,7 @@ public class AddTaskPopupWindow implements OnClickListener {
             public void onAnimationEnd(Animator animation) {
                 etTaskDesc.setFocusable(false);
                 etTaskDesc.setFocusableInTouchMode(false);
+                lyConfirm.setVisibility(View.GONE);
             }
 
             @Override
@@ -416,11 +403,18 @@ public class AddTaskPopupWindow implements OnClickListener {
         ObjectAnimator anim1 = ObjectAnimator.ofFloat(picker, "alpha", 1.0f, 0.0f).setDuration(350);
         ObjectAnimator anim2 = ObjectAnimator.ofFloat(lyTaskInfo, "alpha", 0f, 1.0f).setDuration(350);
         ObjectAnimator anim3 = ObjectAnimator.ofFloat(picker, "translationX", 0, 300f).setDuration(350);
-        anims.play(anim1).with(anim2).with(anim3);
+
+        //使返回键消失
+        ObjectAnimator backAnim1 = ObjectAnimator.ofFloat(ivBackBtn, "alpha", 1f, 0f).setDuration(350);
+        ObjectAnimator backAnim2 = ObjectAnimator.ofFloat(ivBackBtn, "translationY", 0f, 150f).setDuration(300);
+        ObjectAnimator backAnim3 = ObjectAnimator.ofFloat(lyConfirm, "alpha", 0f, 1f).setDuration(200);
+
+        anims.play(anim1).with(anim2).with(anim3).with(backAnim1).with(backAnim2).with(backAnim3);
         anims.addListener(new AnimatorListener() {
 
             @Override
             public void onAnimationStart(Animator animation) {
+                lyConfirm.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -432,6 +426,8 @@ public class AddTaskPopupWindow implements OnClickListener {
                 etTaskDesc.setFocusable(true);
                 etTaskDesc.setFocusableInTouchMode(true);
                 picker.setVisibility(View.GONE);
+                ivBackBtn.setVisibility(View.GONE);
+                lyConfirm.setFocusable(true);
             }
 
             @Override

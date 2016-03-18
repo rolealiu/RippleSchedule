@@ -2,67 +2,81 @@
 <items version="2" >
 
     <item
-        jar="G:\AndroidStudioProjects\RippleSchedule\app\libs\volley.jar"
+        jar="/home/zyk/AndroidStudioProjects/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.2.1/jars/classes.jar"
         jumboMode="false"
-        revision="23.0.1"
+        revision="22.0.0"
+        sha1="e3885783ff8926ed9e2fdcd16816c2e1e73e7aee">
+        <dex dex="/home/zyk/AndroidStudioProjects/RippleSchedule/app/build/intermediates/pre-dexed/debug/classes-19a40d6107057718db7e9d4b42422dee9396e608.jar" />
+    </item>
+    <item
+        jar="/home/zyk/AndroidStudioProjects/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="673d77a5bbddd766037f088e775df525c46407f0">
+        <dex dex="/home/zyk/AndroidStudioProjects/RippleSchedule/app/build/intermediates/pre-dexed/debug/classes-7b633e0837ef1ad694b953d756b24a160d10da8c.jar" />
+    </item>
+    <item
+        jar="/home/zyk/AndroidStudioProjects/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="3be474b1b21b31cf2fa93fe6bd641ae108d96452">
+        <dex dex="/home/zyk/AndroidStudioProjects/RippleSchedule/app/build/intermediates/pre-dexed/debug/classes-048fbe9d4288d6fca2fa32f9f85dc6a35546feef.jar" />
+    </item>
+    <item
+        jar="/home/zyk/AndroidStudioProjects/RippleSchedule/app/libs/volley.jar"
+        jumboMode="false"
+        revision="22.0.0"
         sha1="d57fd9c5dcce9fb775f92d68557370fe891c356b">
-        <dex dex="G:\AndroidStudioProjects\RippleSchedule\app\build\intermediates\pre-dexed\debug\volley-c3e43fc9092e2ae8dfce4fdd40d8a6a530c96634.jar" />
+        <dex dex="/home/zyk/AndroidStudioProjects/RippleSchedule/app/build/intermediates/pre-dexed/debug/volley-df62e00208957076ea1dcdb0e87ec32b9bcb3a41.jar" />
     </item>
     <item
-        jar="G:\AndroidStudioProjects\RippleSchedule\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
+        jar="/home/zyk/AndroidStudioProjects/RippleSchedule/app/libs/jsoup-1.8.2.jar"
         jumboMode="false"
-        revision="23.0.1"
-        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="G:\AndroidStudioProjects\RippleSchedule\app\build\intermediates\pre-dexed\debug\classes-95c6157a81ade2e79baaf829a2f74ee5271b9e96.jar" />
-    </item>
-    <item
-        jar="G:\AndroidStudioProjects\RippleSchedule\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.0.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="4356e230a981d1bbf047d848b91bc0d9b7c5bacc">
-        <dex dex="G:\AndroidStudioProjects\RippleSchedule\app\build\intermediates\pre-dexed\debug\classes-232ab7dbad48fc3c6cc1e3f7587e753ac7402f6c.jar" />
-    </item>
-    <item
-        jar="G:\AndroidStudioProjects\RippleSchedule\app\libs\jsoup-1.8.2.jar"
-        jumboMode="false"
-        revision="23.0.1"
+        revision="22.0.0"
         sha1="580e4dd2a6125cc4037450b40623ac6a552c11df">
-        <dex dex="G:\AndroidStudioProjects\RippleSchedule\app\build\intermediates\pre-dexed\debug\jsoup-1.8.2-c20382622947dd46e9caef1f700df99f628d6913.jar" />
+        <dex dex="/home/zyk/AndroidStudioProjects/RippleSchedule/app/build/intermediates/pre-dexed/debug/jsoup-1.8.2-3e85fbd9aba7f2427173266fbb94924c1bcfed09.jar" />
     </item>
     <item
-        jar="G:\AndroidStudioProjects\RippleSchedule\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
+        jar="/home/zyk/AndroidStudioProjects/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.2.1/jars/classes.jar"
         jumboMode="false"
-        revision="23.0.1"
-        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="G:\AndroidStudioProjects\RippleSchedule\app\build\intermediates\pre-dexed\debug\classes-777ead7a4ae4cf4c986a98fcb0a18609db5c57b7.jar" />
+        revision="22.0.0"
+        sha1="3469cb457f10f74c28cbc05f069b6c894f6cbdd0">
+        <dex dex="/home/zyk/AndroidStudioProjects/RippleSchedule/app/build/intermediates/pre-dexed/debug/classes-cf56ec306276d1755b53b7a12660d7e1a00db154.jar" />
     </item>
     <item
-        jar="D:\android\android-sdk-windows\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
+        jar="/opt/android-sdk-linux/extras/android/m2repository/com/android/support/support-annotations/23.2.1/support-annotations-23.2.1.jar"
         jumboMode="false"
-        revision="23.0.1"
-        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
-        <dex dex="G:\AndroidStudioProjects\RippleSchedule\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.1-afc0160a3cf724a5f599225a736d0d13306036a2.jar" />
+        revision="22.0.0"
+        sha1="ccb693bc0774fcb637246f7360de25b4af7df318">
+        <dex dex="/home/zyk/AndroidStudioProjects/RippleSchedule/app/build/intermediates/pre-dexed/debug/support-annotations-23.2.1-545be137d62df8fdf2d60d6ce2014ea3d7ed3a23.jar" />
     </item>
     <item
-        jar="G:\AndroidStudioProjects\RippleSchedule\app\libs\universal-image-loader-1.9.4.jar"
+        jar="/home/zyk/AndroidStudioProjects/RippleSchedule/app/libs/android-async-http-1.4.5.jar"
         jumboMode="false"
-        revision="23.0.1"
-        sha1="dd9eeb557650c4ad7394df23f0f5cf27a7cfc697">
-        <dex dex="G:\AndroidStudioProjects\RippleSchedule\app\build\intermediates\pre-dexed\debug\universal-image-loader-1.9.4-037054c3d564375695a983eb6f29278d7eb6e2ca.jar" />
-    </item>
-    <item
-        jar="G:\AndroidStudioProjects\RippleSchedule\app\libs\android-async-http-1.4.5.jar"
-        jumboMode="false"
-        revision="23.0.1"
+        revision="22.0.0"
         sha1="77bf7cacf9cefe19dc105e5425d2eb1bb5285881">
-        <dex dex="G:\AndroidStudioProjects\RippleSchedule\app\build\intermediates\pre-dexed\debug\android-async-http-1.4.5-4686a178ae8ebae1fd9f5d0a05f7439f9f01e796.jar" />
+        <dex dex="/home/zyk/AndroidStudioProjects/RippleSchedule/app/build/intermediates/pre-dexed/debug/android-async-http-1.4.5-bec6921ed8af7183c4805f11796a8f7d0daa3146.jar" />
     </item>
     <item
-        jar="G:\AndroidStudioProjects\RippleSchedule\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
+        jar="/home/zyk/AndroidStudioProjects/RippleSchedule/app/libs/universal-image-loader-1.9.4.jar"
         jumboMode="false"
-        revision="23.0.1"
-        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="G:\AndroidStudioProjects\RippleSchedule\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1-6da70c54bf2e711b9e29588f6857edaeede5c6fa.jar" />
+        revision="22.0.0"
+        sha1="dd9eeb557650c4ad7394df23f0f5cf27a7cfc697">
+        <dex dex="/home/zyk/AndroidStudioProjects/RippleSchedule/app/build/intermediates/pre-dexed/debug/universal-image-loader-1.9.4-1b1a25fe707e61459fb348f0b867fd437742971b.jar" />
+    </item>
+    <item
+        jar="/home/zyk/AndroidStudioProjects/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="e4d0cbb0b999604b349062f0214a0a228a7fd151">
+        <dex dex="/home/zyk/AndroidStudioProjects/RippleSchedule/app/build/intermediates/pre-dexed/debug/classes-5ab18880e825c1c1d38664d60566d5d6997e074e.jar" />
+    </item>
+    <item
+        jar="/home/zyk/AndroidStudioProjects/RippleSchedule/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/jars/libs/internal_impl-23.2.1.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="607a3d0b8013b4ccbfeb0b7cb293351994e021fb">
+        <dex dex="/home/zyk/AndroidStudioProjects/RippleSchedule/app/build/intermediates/pre-dexed/debug/internal_impl-23.2.1-c17a9c9fd543de6e193f1f3fc914445c15c7ae3b.jar" />
     </item>
 
 </items>
