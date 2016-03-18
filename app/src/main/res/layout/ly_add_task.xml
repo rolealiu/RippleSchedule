@@ -337,14 +337,13 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="75dp">
-
+            android:layout_height="74dp"
+            android:background="@drawable/shp_border_top">
 
             <RelativeLayout
                 android:id="@+id/ly_add_task_confirm"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/shp_border_top"
                 android:clickable="true">
 
                 <TextView
@@ -378,6 +377,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
+                android:paddingBottom="18dp"
+                android:paddingTop="18dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/img_return_grey_cir"
                 android:visibility="gone" />
